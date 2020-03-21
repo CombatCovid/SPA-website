@@ -6,5 +6,19 @@
 
 module.exports = {
   siteName: 'Gridsome',
-  plugins: []
+  plugins: [
+    {
+      use: `gridsome-source-github-api`,
+      options: {
+        // token: required by the GitHub API
+        token: `someString`,
+  
+        // GraphQLquery: defaults to a search query
+        graphQLQuery: `anotherString`,
+  
+        // variables: defaults to variables needed for a search query
+        variables: `someObject`
+      }
+    }
+  ]
 }
