@@ -18,6 +18,13 @@ module.exports = {
   
         // variables: defaults to variables needed for a search query
         variables: `someObject`
+      },
+      use: '@gridsome/vue-remark',
+      options: {
+        typeName: 'Documentation', // Required
+        baseDir: './content/docs', // Where .md files are located
+        pathPrefix: '/docs', // Add route prefix. Optional
+        template: './src/templates/Docs.vue' // Optional
       }
     }
   ]
