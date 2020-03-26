@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.min.css'
 import InstantSearch from 'vue-instantsearch'
 
 import DefaultLayout from '~/layouts/Default.vue'
+import store from '~/store/index.js' 
 
 const appMixins = {
   methods: {
@@ -59,6 +60,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   };
 
   Vue.mixin(appMixins)
+  appOptions.store = store;
+
   Vue.use(Vuetify)
   Vue.use(InstantSearch)
 
