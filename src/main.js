@@ -3,7 +3,7 @@
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import DefaultLayout from '~/layouts/Default.vue'
-
+import store from '~/store/index.js' 
 
 
 export default function (Vue, { router, head, isClient, appOptions }) {
@@ -21,6 +21,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     },
   };
 
+  appOptions.store = store;
 
   Vue.use(Vuetify)
 
