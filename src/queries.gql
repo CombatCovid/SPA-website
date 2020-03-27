@@ -1,0 +1,43 @@
+# List of repos of particular organization
+query getRepos(){
+    gitapi{
+    organization(login:"CombatCovid"){
+      repositories(first:50){
+        nodes{
+          name
+        }
+      }
+    }
+  }
+}
+
+
+
+# The repo perse is not needed but its content files
+query getRepoContent($repo_name: String!, $org_name: String!) {
+  gitapi {
+    repository(name: $repo_name, owner: $org_name) {
+      name
+      docs: object(expression: "master:docs") {
+        ... on GitApi_Blob {
+          commitUrl
+          text
+        }
+      }
+      images: object(expression: "master:docs/img") {
+        ... on GitApi_Tree {
+          entries {
+            name
+          }
+        }
+      }
+      srcs: object(expression: "master:src") {
+        ... on GitApi_Tree {
+          entries {
+            name
+          }
+        }
+      }
+    }
+  }
+}
