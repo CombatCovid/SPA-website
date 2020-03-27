@@ -16,9 +16,12 @@ export default new Vuex.Store({
     selectedRepo:null,
     repoDocs:[],
     repoImages:[],
+    mainContent:""
   },
+  
   mutations:{
-
+    //
+     
   },
   actions:{
 
