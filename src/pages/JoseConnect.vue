@@ -59,7 +59,7 @@ export default {
 <page-query>
   query Jurra3 {
   gitapi{
-    repos: organization(login:"CombatCovid"){
+    organization(login:"CombatCovid"){
       repositories(first:50){
         nodes {
           name
@@ -112,5 +112,6 @@ fragment FolderInfo on GitApi_TreeEntry {
 <style scoped>
   .horiz-center {
     margin: 0 auto;
+    text-align: center;
   }
 </style>
