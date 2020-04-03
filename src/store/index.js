@@ -11,7 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state:{
     loading:false,
-    language:"EN",
+    language:"ES",
     repoList:[],
     selectedRepo:null,
     repoDocs:[],
@@ -25,6 +25,6 @@ export default new Vuex.Store({
 
   },
   getters:{
-    // Dispatch from carousel
+    // Dispatch repo name from card component
   }
 })

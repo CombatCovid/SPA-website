@@ -9,6 +9,8 @@
   </v-card>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "RepoCard",
   props: {
@@ -19,11 +21,8 @@ export default {
     // Repository summary
     repoSum: String
   },
-  computed:{
-    language () {
-      return this.$store.state.language;
-    }
-  },
+  computed: mapState(['language'])
+  ,
   methods: {
     getImgUrl: function(repoName, fileName) {
       return `https://raw.githubusercontent.com/${this.repoName}/master/docs/img/${this.repoImg}`;
