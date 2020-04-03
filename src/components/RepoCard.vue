@@ -5,6 +5,7 @@
     <v-img :src="repoImg" p-5 class="white--text align-end" height="200px"></v-img>
     <v-card-title v-text="repoName"></v-card-title>
     <v-card-subtitle v-text="repoSum"></v-card-subtitle>
+    <v-btn outline color="primary">{{language}}</v-btn>
   </v-card>
 </template>
 <script>
@@ -17,6 +18,11 @@ export default {
 
     // Repository summary
     repoSum: String
+  },
+  computed:{
+    language () {
+      return this.$store.state.language;
+    }
   },
   methods: {
     getImgUrl: function(repoName, fileName) {
