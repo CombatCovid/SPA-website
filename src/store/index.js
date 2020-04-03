@@ -18,12 +18,13 @@ export default new Vuex.Store({
     repoImages:[],
   },
   mutations:{
-
+    // Change the state of language
   },
   actions:{
+    // Change the 
 
   },
   getters:{
-
+    // Dispatch from carousel
   }
 })
