@@ -3,17 +3,17 @@
       v-on:click="showContent(repo.name)"
       hover min-height="" max-height=""
     >
-    <v-img 
-      :src="getImgUrl(repo.nameWithOwner, repo.cardImage)" 
-      p-5 class="white--text align-end" 
-      height="200px"
-      gradient="to bottom, rgba(0,0,50,.6), rgba(0,0,80,.2)"
-    >
-    </v-img>
-    <v-card-title v-text="repo.title"></v-card-title>
-    <v-card-text class="text-primary" v-text="repo.description"></v-card-text>
+      <v-img 
+        :src="getImgUrl(repo.nameWithOwner, repo.cardImage)" 
+        p-5 class="white--text align-end" 
+        height="200px"
+        gradient="to bottom, rgba(0,0,50,.6), rgba(0,0,80,.2)"
+      >
+      </v-img>
+      <v-card-title v-text="repo.title"></v-card-title>
+      <v-card-text class="text-primary" v-text="repo.description"></v-card-text>
+    </v-card>
   </template>
-</template>
 
 <script>
   export default {
