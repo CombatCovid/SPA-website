@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{678:function(e,t,n){"use strict";n.r(t);var c={name:"404",created:function(){this.$router.push({path:"/finder"})}},r=n(27),a=Object(r.a)(c,(function(){var e=this.$createElement;return(this._self._c||e)("div")}),[],!1,null,"5a583c9c",null);t.default=a.exports}}]);
