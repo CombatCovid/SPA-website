@@ -12,18 +12,23 @@
         <ais-search-box/>
 
         <ais-hits class="clear-above">
-          <div slot-scope="{ items }">
-            <v-layout d-flex flex-wrap>
-              <v-row d-flex cols="1">
-                <v-col cols="12" md="3"
-                       class="d-flex child-flex"
-                       v-for="(item, index) in items" :key="index">
-                  <JoseCard :repo="{ title: item.title, name:
-                  item.name, nameWithOwner: item.nameWithOwner,
-                  description: item.description, cardImage: item.cardImage }"/>
-                </v-col>
-              </v-row>
-            </v-layout>
+          <div class="viewer" slot-scope="{ items }">
+              <v-container class="viewer__container" grid-list-lg fluid>
+             <v-layout row wrap>
+              <v-flex xs12 sm6 md3 lg3 v-for="(item, index) in items" :key="index">
+                  <JoseCard
+                    v-if="item.cardImage !== null" 
+                    :repo="{ 
+                      title: item.title, 
+                      name:item.name, 
+                      nameWithOwner: item.nameWithOwner,
+                      description: item.description, 
+                      cardImage: item.cardImage 
+                      }"
+                  />
+              </v-flex>
+            </v-layout>              
+            </v-container>
           </div>
         </ais-hits>
 
@@ -53,6 +58,11 @@
       }
     },
     components: { JoseCard, JoseLayout },
+    computed:{
+      placeholder: function(){
+        return "/resources/image/image-placeholder.png"
+      }
+    },
     methods: {
       showContent(repoName){
         return this.$router.push({ path: `/viewer/${repoName}`, design: '${repoName}' })
@@ -62,7 +72,7 @@
 </script>
 
 <style scoped>
-  .horiz-center {
+  /* .horiz-center {
     margin: 0 auto;
     text-align: center;
   }
@@ -74,5 +84,12 @@
   }
   .clear-above {
     margin-top: 10px;
+  } */
+
+  .viewer__container{
+
   }
+
+  @media
+  
 </style>
