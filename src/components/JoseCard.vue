@@ -2,7 +2,6 @@
     <v-card 
       v-on:click="showContent(repo.name)"
       hover min-height="" max-height=""
-      
     >
     <v-img 
       :src="getImgUrl(repo.nameWithOwner, repo.cardImage)" 
