@@ -3,7 +3,7 @@
     <!-- <v-col cols="3" class="hidden-sm-and-down">
       <DesignChoices/>
     </v-col> -->
-    <v-flex xs12 md7 class="">
+    <v-flex xs12 md7 lg5 class="">
       <DesignDetail :design="design"/>
     </v-flex>
     <!-- <v-flex xs12 md7 class="">

@@ -1,5 +1,6 @@
 <template>
-  <Layout>
+  <Layout class="">
+    <div class="viewer-container">
     <h1 class="horiz-center">Viewer</h1>
     <div class="master-detail" style="max-width:800px; margin:0 auto;">
       <p>
@@ -10,11 +11,11 @@
       </p>
     </div>
     <div class="master-detailx">
-      <v-container class="">
+      <v-container class="viewer-container">
           <HorizontalMD :design="design"/>
       </v-container>
     </div>
-
+  </div>
   </Layout>
 </template>
 
@@ -44,11 +45,15 @@
 </script>
 
 <style scoped>
+  .viewer-container{
+    padding:3em 1em 0 1em;
+    margin-bottom:3em;
+  }
+
   .li {
     margin-bottom: 1em !important;
   }
   
-
   .horiz-center {
     margin: 0 auto;
     text-align: center;
@@ -71,5 +76,6 @@
     background-color: beige;
     }
   }
+
   
 </style>

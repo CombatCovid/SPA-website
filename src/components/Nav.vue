@@ -24,16 +24,19 @@
       <v-spacer></v-spacer>
       <v-list>
         <v-btn v-for="icon in icons" :key="icon" :href="icon.link" icon target="_blank">
-          <v-icon size="24px">{{ icon.name }}</v-icon>
+          <v-icon size="22px">{{ icon.name }}</v-icon>
         </v-btn>
       </v-list>
 
       <v-menu left bottom>
-        <template v-slot:activator="{ on }">
+        
+        <!-- Hide this feature for now as is not complete -->
+
+        <!-- <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" color="yellow">
             <v-icon>{{ extrasIcon }}</v-icon>
           </v-btn>
-        </template>
+        </template> -->
 
         <div class="below-bar">
           <DesignChoices />
