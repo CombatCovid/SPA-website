@@ -25,6 +25,12 @@
               <v-btn to="/documentation#cautionary" class="ma-1 centered"
                      dark color="teal">Consider for designs...
               </v-btn>
+              <v-btn @click="postIt" class="ma-1 centered"
+                     dark color="teal">Ranging...
+              </v-btn>
+              <v-btn @click="postEet" class="ma-1 centered"
+                     dark color="green">Ranging Eet...
+              </v-btn>
             </v-layout>
           </v-flex>
           <v-flex py-5 xs12 sm12 md4 style="margin:1.5em;">
@@ -84,6 +90,7 @@
 <script>
 
   import Footer from '~/components/Footer'
+  import axios from 'axios'
 
   export default {
     metaInfo: {
@@ -122,7 +129,65 @@
         //   'fab fa-instagram',
         // ],
       }
-    }
+    },
+    methods: {
+      postIt: function () {
+        console.log('posting, boss')
+
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'text/plain');
+
+        const myInit = {
+          method: 'POST',
+          headers: myHeaders,
+          mode: 'no-cors',
+          cache: 'default',
+          body: 'here we are'
+        }
+
+        const myRequest = new Request('https://home.narrationsd.com/.netlify/functions/greet',myInit);
+
+        fetch(myRequest).then(function(response) {
+          console.log ('fetch response: ' + JSON.stringify(response))
+          return response;
+        }).then(function(response) {
+            console.log ('then response: ' + JSON.stringify(response.body))
+          })
+          .catch (function (error) {
+            console.log ('error: '+ error)
+          })
+      },
+      postEet: function () {
+        console.log('posting eet, boss')
+
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'text/plain');
+
+        const myInit = {
+          method: 'POST',
+          headers: myHeaders,
+          mode: 'no-cors',
+          cache: 'default',
+          body: 'here we are'
+        }
+
+        const url = 'https://home.narrationsd.com/.netlify/functions/greet'
+        axios.defaults.headers.post['Content-Type'] ='text-plain'
+        axios ({
+          method: 'post',
+          url:  url,
+          data: myInit.body,
+          // mode: 'no-cors',
+          crossDomain: true
+        })
+        .then(function(response) {
+            console.log ('then response: ' + JSON.stringify(response.body))
+          })
+          .catch (function (error) {
+            console.log ('error: '+ error)
+          })
+      },
+    },
   }
 </script>
 
