@@ -184,6 +184,7 @@ a:visited {
   font-size: small;
   padding: 0 1em;
 }
+
 .below-bar {
   margin-top: 60px;
   padding: 10px;
