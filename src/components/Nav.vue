@@ -180,10 +180,6 @@ a:visited {
   color: white;
 }
 
-/* a:active{
-    background:red;
-  } */
-
 .bar-title {
   font-size: small;
   padding: 0 1em;
