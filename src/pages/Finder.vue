@@ -7,18 +7,20 @@
           <ais-instant-search :index-name="indexName"
                               :search-client="searchClient" class="horiz-center searchbox">
 
-            <ais-configure :hits-per-page.camel="32"/>
+<!--            <ais-configure :hits-per-page.camel="96"/>-->
 
             <ais-powered-by/>
             <ais-search-box show-loading-indicator/>
 
-            <ais-hits class="clear-above">
+            <ais-hits class="clear-above" :transform-items="resetOffset">
               <div slot-scope="{ items }" class="">
                 <div class="d-flex flex-nowrap horiz-center content-sized">
-                  <v-btn class="slide-btn-spaced"@click="slideFinds(-blockSize, items.length)"><</v-btn>
-                  <p v-if="items.length > 0" class="slide-count-text">Showing {{ wordOfOffset(items.length) }} out of {{ items.length }} designs</p>
+                  <v-btn class="slide-btn-spaced-left" @click="slideFinds(-blockSize, items.length)"><</v-btn>
+                  <p v-if="items.length > 0" class="slide-count-text">
+                    <span class="shorten">Showing </span>{{ wordOfOffset(items.length) }} of {{ items.length }}
+                    <span class="shorten320">Designs </span>found</p>
                   <p v-else class="slide-count-text">No Designs match your search...</p>
-                  <v-btn class="slide-btn-spaced" @click="slideFinds(blockSize, items.length)">></v-btn>
+                  <v-btn class="slide-btn-spaced-right" @click="slideFinds(blockSize, items.length)">></v-btn>
                 </div>
                 <v-layout d-flex flex-wrap>
                   <v-row d-flex cols="1">
@@ -67,6 +69,10 @@
     },
     methods: {
       offsetFinds: (finds, offset = 0, blockSize = 8) => finds.slice(offset, blockSize + offset),
+      resetOffset: function (items)  {
+        this.currentOffset = 0 // *todo* likely a better way exists, if events at present are masked
+        return items
+      },
       wordOfOffset: function (totalHits) { // *todo* temp, as I have a comprehesive fn for this, dig it up....
         const words = [ 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth',
           'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth' ]
@@ -99,8 +105,35 @@
   .content-sized {
     width: max-content;
   }
-  .slide-btn-spaced {
-    margin: 0 15px;
+
+  @media screen and (max-width: 480px) {
+    .shorten {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 359px) {
+    .shorten320 {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .shorten {
+      display: none;
+    }
+  }
+
+  .slide-btn-spaced-left {
+    margin-left: 0;
+    margin-right: 15px;
+    max-width: 24px !important;
+    min-width: 24px !important;
+  }
+  .slide-btn-spaced-right {
+    margin-left: 15px;
+    margin-right: 0;
+    max-width: 24px !important;
+    min-width: 24px !important;
   }
   .slide-count-text {
     margin-top: 7px;
