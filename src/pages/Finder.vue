@@ -7,10 +7,12 @@
           <ais-instant-search :index-name="indexName"
                               :search-client="searchClient" class="horiz-center searchbox">
 
-<!--            <ais-configure :hits-per-page.camel="96"/>-->
-
             <ais-powered-by/>
-            <ais-search-box show-loading-indicator/>
+            <ais-search-box show-loading-
+                            :class-names="{
+                              'ais-SearchBox-input': 'search-outline',
+                            }"
+            />
 
             <ais-hits class="clear-above" :transform-items="resetOffset">
               <div slot-scope="{ items }" class="">
@@ -93,6 +95,18 @@
     components: { JoseFinderCard },
   }
 </script>
+
+<style>
+  /*
+   * n.b. we need the styling over-rides to be outside Vue's scopes, to affect Algolia.
+   */
+  .search-outline {
+    outline-color: transparent;
+    background-color: #e4eff7;
+    padding: 2px 7px;
+  }
+
+</style>
 
 <style scoped>
   .horiz-center {
