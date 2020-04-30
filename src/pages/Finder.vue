@@ -7,18 +7,28 @@
           <ais-instant-search :index-name="indexName"
                               :search-client="searchClient" class="horiz-center searchbox">
 
-            <ais-configure :hits-per-page.camel="8"/>
-
             <ais-powered-by/>
-            <ais-search-box/>
+            <ais-search-box show-loading-
+                            :class-names="{
+                              'ais-SearchBox-input': 'search-outline',
+                            }"
+            />
 
-            <ais-hits class="clear-above">
-              <div slot-scope="{ items }">
+            <ais-hits class="clear-above" :transform-items="resetOffset">
+              <div slot-scope="{ items }" class="">
+                <div class="d-flex flex-nowrap horiz-center content-sized">
+                  <v-btn class="slide-btn-spaced-left" @click="slideFinds(-blockSize, items.length)"><</v-btn>
+                  <p v-if="items.length > 0" class="slide-count-text">
+                    <span class="shorten">Showing </span>{{ wordOfOffset(items.length) }} of {{ items.length }}
+                    <span class="shorten320">Designs </span>found</p>
+                  <p v-else class="slide-count-text">No Designs match your search...</p>
+                  <v-btn class="slide-btn-spaced-right" @click="slideFinds(blockSize, items.length)">></v-btn>
+                </div>
                 <v-layout d-flex flex-wrap>
                   <v-row d-flex cols="1">
                     <v-col cols="12" md="3"
                            class="d-flex child-flex"
-                           v-for="(item, index) in items" :key="index">
+                           v-for="(item, index) in offsetFinds(items, currentOffset)" :key="index">
                       <JoseFinderCard :repo="{ title: item.title, name: item.name,
                         nameWithOwner: item.nameWithOwner, isPrivate: item.isPrivate,
                         description: item.description, cardImage: item.cardImage,
@@ -49,6 +59,8 @@
     data: function () {
       return {
         numberRepos: 3,
+        blockSize: 8,
+        currentOffset: 0,
         indexName: store.getters.algoSearchIndex,
         searchClient: algoliasearch(
           store.getters.algoAppId,
@@ -57,9 +69,44 @@
         repoBranch: store.getters.repoBranch
       }
     },
+    methods: {
+      offsetFinds: (finds, offset = 0, blockSize = 8) => finds.slice(offset, blockSize + offset),
+      resetOffset: function (items)  {
+        this.currentOffset = 0 // *todo* likely a better way exists, if events at present are masked
+        return items
+      },
+      wordOfOffset: function (totalHits) { // *todo* temp, as I have a comprehesive fn for this, dig it up....
+        const words = [ 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth',
+          'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth' ]
+
+        // *todo* safe for present words but see above, and/or refactor
+        const blockNumber = Math.min(Math.floor(this.currentOffset / this.blockSize), 14)
+        const numberShown = Math.min (totalHits - (this.blockSize * blockNumber), this.blockSize)
+        const last = blockNumber > 0  && (totalHits - (this.blockSize * blockNumber)) <= this.blockSize
+
+        return (last ? 'last' : words[blockNumber]) + ' ' + numberShown.toString()
+      },
+      slideFinds: function (slide, totalHits) {
+        // *todo* later in steps, we have effect and slider/arrow-button drive
+        this.currentOffset = Math.min(Math.max(0, this.currentOffset + slide),
+          this.blockSize * Math.floor(totalHits / this.blockSize))
+      }
+    },
     components: { JoseFinderCard },
   }
 </script>
+
+<style>
+  /*
+   * n.b. we need the styling over-rides to be outside Vue's scopes, to affect Algolia.
+   */
+  .search-outline {
+    outline-color: transparent;
+    background-color: #e4eff7;
+    padding: 2px 7px;
+  }
+
+</style>
 
 <style scoped>
   .horiz-center {
@@ -68,6 +115,42 @@
   }
   .searchbox {
     margin: 15px;
+  }
+  .content-sized {
+    width: max-content;
+  }
+
+  @media screen and (max-width: 480px) {
+    .shorten {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 359px) {
+    .shorten320 {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .shorten {
+      display: none;
+    }
+  }
+
+  .slide-btn-spaced-left {
+    margin-left: 0;
+    margin-right: 15px;
+    max-width: 24px !important;
+    min-width: 24px !important;
+  }
+  .slide-btn-spaced-right {
+    margin-left: 15px;
+    margin-right: 0;
+    max-width: 24px !important;
+    min-width: 24px !important;
+  }
+  .slide-count-text {
+    margin-top: 7px;
   }
   .low-attention {
     font-size: x-small;
