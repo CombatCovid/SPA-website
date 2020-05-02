@@ -129,18 +129,19 @@ export default {
       designIcon: mdiDotsHorizontal,
       items: [
         { name: "/", label: "Home", color: "teal", class: "spaced-btn" },
-        {
-          name: "/finder",
-          label: "Finder",
-          color: "blue",
-          class: "soft-antwerp-light"
-        },
-        {
-          name: "/viewer",
-          label: "Viewer",
-          color: "blue",
-          class: "soft-antwerp-light spaced-btn"
-        },
+        // *todo* These are not presented yet on main site
+        // {
+        //   name: "/finder",
+        //   label: "Finder",
+        //   color: "blue",
+        //   class: "soft-antwerp-light"
+        // },
+        // {
+        //   name: "/viewer",
+        //   label: "Viewer",
+        //   color: "blue",
+        //   class: "soft-antwerp-light spaced-btn"
+        // },
         {
           name: "/documentation",
           label: "Documentation",
